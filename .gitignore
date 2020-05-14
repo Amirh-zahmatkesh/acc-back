@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# model blueprint
+model_blueprint.txt
+
+# postgres container's data
+postgres-data/
