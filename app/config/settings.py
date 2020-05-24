@@ -38,8 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # third-pary apps
+    'rest_framework',
+    'rest_framework.authtoken',
+
     # my apps
     'core',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -128,3 +133,5 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = '/vol/web/media'
 STATIC_ROOT = '/vol/web/static'
+
+AUTH_USER_MODEL = "users.User"
