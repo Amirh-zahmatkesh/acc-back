@@ -19,9 +19,10 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
         # TODO add certificates and videos
-        fields = ('email', 'password', 'first_name', 'last_name',
+        fields = ('id', 'email', 'password', 'first_name', 'last_name',
                   'phone_number', 'credit', 'points')
-        extra_kwargs = {'password': {'write_only': True, 'min_length': 5}}
+        extra_kwargs = {'password': {'write_only': True,
+                                     'label': 'گذرواژه', 'min_length': 5}}
 
     def create(self, validated_data):
         """Create a new user and return it"""
@@ -41,9 +42,9 @@ class UserSerializer(serializers.ModelSerializer):
 
 class AuthTokenSerializer(serializers.Serializer):
     """Serializer for the user authentication object"""
-    email = serializers.CharField()
+    email = serializers.CharField(label='ایمیل')
     password = serializers.CharField(
-        style={'input_type': 'password'},
+        style={'input_type': 'password'}, label='گذرواژه',
         trim_whitespace=False
     )
 
@@ -65,10 +66,10 @@ class AuthTokenSerializer(serializers.Serializer):
         return attrs
 
 
-# class ProfileImageSerializer(serializers.ModelSerializer):
-#     """Serializer for uploading profile images"""
+class UserImageSerializer(serializers.ModelSerializer):
+    """Serializer for uploading images to users"""
 
-#     class Meta:
-#         model = get_user_model()
-#         fields = ('id', 'image')
-#         read_only_fields = ('id',)
+    class Meta:
+        model = get_user_model()
+        fields = ('id', 'image')
+        read_only_fields = ('id',)
