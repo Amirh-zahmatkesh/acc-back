@@ -1,5 +1,5 @@
-# import uuid
-# import os
+import uuid
+import os
 
 from django.contrib.auth.models import (AbstractBaseUser,
                                         BaseUserManager,
@@ -8,12 +8,12 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 
-# def profile_image_file_path(instance, filename):
-#     """Generate file path for new recipe image keeping it's extention"""
-#     extention = filename.split('.')[-1]
-#     filename = f'{uuid.uuid4()}.{extention}'
+def profile_image_file_path(instance, filename):
+    """Generate file path for new recipe image keeping it's extention"""
+    extention = filename.split('.')[-1]
+    filename = f'{uuid.uuid4()}.{extention}'
 
-#     return os.path.join('uploads/profileimages/', filename)
+    return os.path.join('uploads/profileimages/', filename)
 
 
 class UserManager(BaseUserManager):
@@ -50,8 +50,8 @@ class User(PermissionsMixin, AbstractBaseUser):
                                  blank=True)
     credit = models.IntegerField(verbose_name='اعتبار', null=True)
     points = models.IntegerField(verbose_name='امتیاز', null=True)
-    # image = models.ImageField(verbose_name='تصویر کاربری', null=True,
-    #                           upload_to=profile_image_file_path)
+    image = models.ImageField(verbose_name='تصویر کاربری', null=True,
+                              upload_to=profile_image_file_path)
     # certificates = models.ManyToManyField(Certificate)
     # videos = models.ManyToManyField(Video)
     is_active = models.BooleanField(verbose_name='فعال است', default=True)

@@ -1,9 +1,9 @@
-# from unittest.mock import patch
+from unittest.mock import patch
 
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 
-# from users import models
+from users import models
 
 
 def sample_user(email='testuser@gmail.com', password='testpass'):
@@ -46,13 +46,13 @@ class ModelTests(TestCase):
         self.assertTrue(user.is_superuser)
         self.assertTrue(user.is_staff)
 
-    # @patch('uuid.uuid4')
-    # def test_recipe_file_name_uuid(self, mock_uuid):
-    #     """Test that image is saved in the currect location"""
-    #     uuid = 'test-uuid'
-    #     mock_uuid.return_value = uuid
-    #     file_path = models.recipe_image_file_path(None, 'my_image.jpg')
+    @patch('uuid.uuid4')
+    def test_profile_file_name_uuid(self, mock_uuid):
+        """Test that image is saved in the currect location"""
+        uuid = 'test-uuid'
+        mock_uuid.return_value = uuid
+        file_path = models.profile_image_file_path(None, 'my_image.jpg')
 
-    #     expected_path = f'uploads/recipe/{uuid}.jpg'
+        expected_path = f'uploads/profileimages/{uuid}.jpg'
 
-    #     self.assertEqual(file_path, expected_path)
+        self.assertEqual(file_path, expected_path)
