@@ -17,10 +17,6 @@ ME_URL = reverse('users:me')
 IMAGE_UPLOAD_URL = reverse('users:upload_image')
 
 
-# def image_upload_url(user_id):
-#     """Return url for user image upload"""
-#     return reverse('users:upload_image', args=[user_id])
-
 def create_user(**params):
     return get_user_model().objects.create_user(**params)
 
@@ -128,6 +124,7 @@ class PrivateUserApiTests(TestCase):
 
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         self.assertEqual(res.data, {
+            'id': self.user.id,
             'email': self.user.email,
             'first_name': self.user.first_name,
             'last_name': self.user.last_name,

@@ -52,8 +52,7 @@ class User(PermissionsMixin, AbstractBaseUser):
     points = models.IntegerField(verbose_name='امتیاز', null=True)
     image = models.ImageField(verbose_name='تصویر کاربری', null=True,
                               upload_to=profile_image_file_path)
-    # certificates = models.ManyToManyField(Certificate)
-    # videos = models.ManyToManyField(Video)
+    # videos = models.ManyToManyField('Video')
     is_active = models.BooleanField(verbose_name='فعال است', default=True)
     is_staff = models.BooleanField(default=False)
 
