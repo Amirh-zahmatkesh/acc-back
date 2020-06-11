@@ -27,3 +27,22 @@ class Certificate(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=255)
+    slug = models.SlugField()
+    parent = models.ForeignKey('self', blank=True, on_delete=models.SET_NULL,
+                               null=True, related_name='children')
+
+    class Meta:
+        unique_together = ('slug', 'parent', )
+        verbose_name_plural = "categories"
+
+    def __str__(self):
+        full_path = [self.name]
+        k = self.parent
+        while k is not None:
+            full_path.append(k.name)
+            k = k.parent
+        return ' -> '.join(full_path[::-1])

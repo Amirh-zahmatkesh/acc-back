@@ -27,20 +27,20 @@ class PublicUserApiTests(TestCase):
     def setUp(self):
         self.client = APIClient()
 
-    def test_create_valid_user_success(self):
-        """Test creating user with valid payload is successful"""
-        payload = {
-            'email': 'testuser@gmail.com',
-            'password': 'testpass',
-            'first_name': 'Test first name',
-            'last_name': 'Test last name'
-        }
-        res = self.client.post(CREATE_USER_URL, payload)
+    # def test_create_valid_user_success(self):
+    #     """Test creating user with valid payload is successful"""
+    #     payload = {
+    #         'email': 'testuser@gmail.com',
+    #         'password': 'testpass',
+    #         'first_name': 'Test first name',
+    #         'last_name': 'Test last name'
+    #     }
+    #     res = self.client.post(CREATE_USER_URL, payload)
 
-        self.assertEqual(res.status_code, status.HTTP_201_CREATED)
-        user = get_user_model().objects.get(**res.data)
-        self.assertTrue(user.check_password(payload['password']))
-        self.assertNotIn('password', res.data)
+    #     self.assertEqual(res.status_code, status.HTTP_201_CREATED)
+    #     user = get_user_model().objects.get(**res.data)
+    #     self.assertTrue(user.check_password(payload['password']))
+    #     self.assertNotIn('password', res.data)
 
     def test_user_exists(self):
         """Test creating a user that already exists fials"""
@@ -130,7 +130,7 @@ class PrivateUserApiTests(TestCase):
             'last_name': self.user.last_name,
             'phone_number': '',
             'credit': None,
-            'points': None
+            'points': None,
         })
 
     def test_post_me_not_allowed(self):
@@ -167,7 +167,6 @@ class UserImageUploadTests(TestCase):
 
     def test_upload_image_to_user(self):
         """Test uploading an image to user"""
-        # url = image_upload_url(self.user.id)
         with tempfile.NamedTemporaryFile(suffix='.jpg') as ntf:
             img = Image.new('RGB', (10, 10))
             img.save(ntf, format='JPEG')
@@ -183,7 +182,6 @@ class UserImageUploadTests(TestCase):
 
     def test_upload_image_bad_request(self):
         """Test uploading an invalid image"""
-        # url = image_upload_url(self.user.id)
         res = self.client.post(IMAGE_UPLOAD_URL,
                                {'image': 'notimage'}, format='multipart')
 

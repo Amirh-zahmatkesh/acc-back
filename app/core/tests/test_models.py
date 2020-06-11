@@ -31,3 +31,25 @@ class ModelTests(TestCase):
         expected_path = f'uploads/certificateimages/{uuid}.jpg'
 
         self.assertEqual(file_path, expected_path)
+
+    def test_category_str(self):
+        """Test the category string representation without a parent"""
+        category = models.Category.objects.create(
+            name='financial accounting',
+            slug='financial accounting'
+        )
+        self.assertEqual(str(category), category.name)
+
+    def test_category_str_with_parent(self):
+        """Test the category string representation with parent"""
+        category1 = models.Category.objects.create(
+            name='accounting',
+            slug='accounting'
+        )
+        category2 = models.Category.objects.create(
+            name='financial accounting',
+            slug='financial-accounting',
+            parent=category1
+        )
+        self.assertEqual(str(category2),
+                         f"{category1.name} -> {category2.name}")

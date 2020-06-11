@@ -4,3 +4,4 @@ from . import models
 
 
 admin.site.register(models.Certificate)
+admin.site.register(models.Category)

@@ -7,10 +7,7 @@ from rest_framework import serializers
 class UserSerializer(serializers.ModelSerializer):
     """Serializer for the user object"""
     # TODO
-    # certificates = serializers.PrimaryKeyRelatedField(
-    #     many=True,
-    #     queryset=Ingredient.objects.all()
-    # )
+    # certificates
     # videos = serializers.PrimaryKeyRelatedField(
     #     many=True,
     #     queryset=Tag.objects.all()
@@ -23,6 +20,7 @@ class UserSerializer(serializers.ModelSerializer):
                   'phone_number', 'credit', 'points')
         extra_kwargs = {'password': {'write_only': True,
                                      'label': 'گذرواژه', 'min_length': 5}}
+        read_only_fields = ('certificates', )
 
     def create(self, validated_data):
         """Create a new user and return it"""
