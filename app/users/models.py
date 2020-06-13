@@ -9,7 +9,7 @@ from django.utils.translation import gettext_lazy as _
 
 
 def profile_image_file_path(instance, filename):
-    """Generate file path for new recipe image keeping it's extention"""
+    """Generate file path for new profile image keeping it's extention"""
     extention = filename.split('.')[-1]
     filename = f'{uuid.uuid4()}.{extention}'
 

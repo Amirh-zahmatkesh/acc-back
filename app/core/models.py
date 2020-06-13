@@ -19,6 +19,7 @@ class Certificate(models.Model):
                              related_name='certificates',
                              on_delete=models.CASCADE, null=True)
     name = models.CharField(verbose_name='نام', max_length=255)
+    slug = models.SlugField()
     image = models.ImageField(null=True, upload_to=certificate_image_file_path)
     thumbnail = models.ImageField(null=True,
                                   upload_to=certificate_image_file_path)
@@ -30,6 +31,7 @@ class Certificate(models.Model):
 
 
 class Category(models.Model):
+    """Category for posts, videos ..."""
     name = models.CharField(max_length=255)
     slug = models.SlugField()
     parent = models.ForeignKey('self', blank=True, on_delete=models.SET_NULL,
@@ -46,3 +48,11 @@ class Category(models.Model):
             full_path.append(k.name)
             k = k.parent
         return ' -> '.join(full_path[::-1])
+
+
+class Keyword(models.Model):
+    """A model for storing keywords for SEO"""
+    word = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.word

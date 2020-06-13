@@ -13,6 +13,7 @@ class ModelTests(TestCase):
         certificate = models.Certificate.objects.create(
             name='financial accounting',
             minimum_grade=85,
+            slug='fanancial-accounting',
             user=get_user_model().objects.create_user(
                 email='testuser@gmail.com',
                 password='testpass'
@@ -53,3 +54,9 @@ class ModelTests(TestCase):
         )
         self.assertEqual(str(category2),
                          f"{category1.name} -> {category2.name}")
+
+    def test_keyword_str(self):
+        """Test the keyword string representation"""
+        keyword = models.Keyword.objects.create(word='keyword')
+
+        self.assertEqual(str(keyword), keyword.word)
