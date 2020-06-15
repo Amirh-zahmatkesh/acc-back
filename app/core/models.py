@@ -56,3 +56,12 @@ class Keyword(models.Model):
 
     def __str__(self):
         return self.word
+
+
+class Faq(models.Model):
+    """A model for the FAQ"""
+    question = models.TextField()
+    answer = models.TextField()
+
+    def __str__(self):
+        return f'q: {self.question} a: {self.answer}'

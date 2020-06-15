@@ -60,3 +60,9 @@ class ModelTests(TestCase):
         keyword = models.Keyword.objects.create(word='keyword')
 
         self.assertEqual(str(keyword), keyword.word)
+
+    def test_Faq_str(self):
+        """Test the FAQ string representation"""
+        Faq = models.Faq.objects.create(question='sth', answer='sthelse')
+
+        self.assertEqual(str(Faq), f'q: {Faq.question} a: {Faq.answer}')
