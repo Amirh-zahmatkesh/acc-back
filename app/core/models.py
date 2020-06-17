@@ -4,6 +4,8 @@ import os
 from django.conf import settings
 from django.db import models
 
+from ckeditor.fields import RichTextField
+
 
 def certificate_image_file_path(instance, filename):
     """Generate file path for new certificate image keeping it's extention"""
@@ -64,4 +66,17 @@ class Faq(models.Model):
     answer = models.TextField()
 
     def __str__(self):
-        return f'q: {self.question} a: {self.answer}'
+        return self.question
+
+
+class Example(models.Model):
+    """A model for examples of posts and videos"""
+    question = RichTextField()
+    answer = RichTextField()
+    # video = models.ForeignKey('Video', null=True, blank=True,
+    #                           on_delete=models.SET_NULL)
+    # article = models.ForeignKey('ArticlePost', null=True, blank=True,
+    #                             on_delete=models.SET_NULL)
+
+    def __str__(self):
+        return self.question

@@ -61,8 +61,15 @@ class ModelTests(TestCase):
 
         self.assertEqual(str(keyword), keyword.word)
 
-    def test_Faq_str(self):
+    def test_faq_str(self):
         """Test the FAQ string representation"""
-        Faq = models.Faq.objects.create(question='sth', answer='sthelse')
+        faq = models.Faq.objects.create(question='sth', answer='sthelse')
 
-        self.assertEqual(str(Faq), f'q: {Faq.question} a: {Faq.answer}')
+        self.assertEqual(str(faq), faq.question)
+
+    def test_example_str(self):
+        """Test the example string representation"""
+        example = models.Example.objects.create(
+            question='sth', answer='sthelse')
+
+        self.assertEqual(str(example), example.question)
